@@ -1,0 +1,75 @@
+# Dependencies
+node_modules/
+bower_components/
+jspm_packages/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Diagnostic reports
+report.*.json
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Build outputs
+dist/
+build/
+out/
+.tmp/
+tmp/
+temp/
+
+# Caches
+.cache/
+.parcel-cache/
+.next/
+.nuxt/
+.svelte-kit/
+.astro/
+.vite/
+.eslintcache
+.stylelintcache
+.node-gyp/
+.rpt2_cache/
+
+# TypeScript
+*.tsbuildinfo
+
+# Serverless / bundlers
+.serverless/
+.webpack/
+
+# Env files (keep a sample)
+.env
+.env.*
+!.env.example
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE/editor
+.idea/
+.vscode/
+
+# Node REPL history
+.node_repl_history
+
+# npm/yarn/pnpm caches
+.npm/
+.pnpm-debug.log*
+.yarn-cache/
