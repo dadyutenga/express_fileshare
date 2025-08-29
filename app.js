@@ -21,7 +21,7 @@ const paymentRoutes = require('./routes/payments');
 const notificationRoutes = require('./routes/notifications');
 
 // Import middleware
-const errorHandler = require('./middleware/errorHandler');
+const { errorHandler } = require('./middleware/errorHandler');
 const { notFound } = require('./middleware/notFound');
 
 const app = express();
@@ -106,18 +106,30 @@ app.use(errorHandler);
 // Database sync and server start
 const PORT = process.env.PORT || 5000;
 
-sequelize.authenticate()
-  .then(() => {
-    console.log('Database connected successfully.');
-    return sequelize.sync({ alter: true }); // Use { force: true } in development to drop and recreate tables
-  })
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
+// Only sync database if not in test mode
+if (process.env.NODE_ENV !== 'test') {
+  sequelize.authenticate()
+    .then(() => {
+      console.log('Database connected successfully.');
+      return sequelize.sync({ alter: true }); // Use { force: true } in development to drop and recreate tables
+    })
+    .then(() => {
+      app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+      });
+    })
+    .catch(err => {
+      console.error('Unable to connect to the database:', err);
     });
-  })
-  .catch(err => {
-    console.error('Unable to connect to the database:', err);
-  });
+} else {
+  // In test mode, just authenticate and let tests handle sync
+  sequelize.authenticate()
+    .then(() => {
+      console.log('Database connected successfully (test mode).');
+    })
+    .catch(err => {
+      console.error('Unable to connect to the database:', err);
+    });
+}
 
 module.exports = app;

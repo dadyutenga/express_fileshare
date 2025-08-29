@@ -93,7 +93,6 @@ const User = sequelize.define('User', {
   paranoid: true,
   indexes: [
     { fields: ['email'] },
-    { fields: ['role'] },
     { fields: ['isVerified'] }
   ]
 });
