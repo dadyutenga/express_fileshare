@@ -1,0 +1,105 @@
+
+You are an expert full-stack developer specializing in Node.js and Express.js. Your task is to generate a complete, production-ready codebase for a comprehensive file-sharing platform called "ShareVault". The platform must be built using Express.js as the backend framework, with PostgreSQL as the database (using Sequelize for ORM). Integrate necessary libraries for all features. Focus exclusively on the backend API, providing endpoints, models, controllers, and routes. Do not include any frontend code or structures.
+The platform should support the following core features:
+
+User Authentication and Authorization:
+
+User registration with email verification (using Nodemailer for emails).
+Login with JWT-based authentication (using jsonwebtoken).
+Password reset functionality.
+Role-based access control (RBAC): roles include 'user', 'admin', and 'premium_user'.
+OAuth integration for Google and GitHub logins (using Passport.js).
+Two-factor authentication (2FA) using Speakeasy and QR code generation.
+
+
+File Management:
+
+Upload files (single and multiple) with support for large files (using Multer for handling uploads, and store files on AWS S3 or local filesystem).
+File metadata storage: name, size, type, upload date, owner, tags, and description.
+File versioning: allow users to upload new versions of existing files.
+File compression on upload (using Archiver for ZIP).
+File preview: generate thumbnails for images/videos/PDFs (using Sharp for images, FFmpeg for videos).
+File search: full-text search by name, tags, or content (using PostgreSQL full-text search capabilities).
+File deletion (soft delete with recycle bin functionality).
+Folder structure: users can create folders, nest files/folders, and manage hierarchies.
+
+
+Sharing and Collaboration:
+
+Generate shareable links with expiration dates, passwords, and download limits.
+Public vs. private sharing: control access via links or user invitations.
+Collaboration: allow multiple users to edit shared files (integrate with a real-time editor like ShareDB if possible, or simple comment system).
+Access permissions: read-only, edit, or full control for shared files/folders.
+Share analytics: track views, downloads, and shares.
+
+
+User Profiles and Social Features:
+
+Profile management: update avatar, bio, email preferences.
+Follow/unfollow users, with notifications for new shares from followed users.
+Activity feed: show recent uploads, shares, and downloads.
+Notifications system: email and in-app notifications (using Socket.io for real-time).
+
+
+Admin Panel Features:
+
+Dashboard: overview of users, files, storage usage, and analytics (API endpoints to fetch data for a potential frontend).
+User management: view, ban, promote/demote users, reset passwords.
+File moderation: review reported files, delete inappropriate content.
+System logs: audit logs for all actions (using Winston for logging).
+Content reports: users can report files, admins review and act.
+Backup and restore: admin tools to backup database and files.
+
+
+Payment and Subscription Features:
+
+Integrate Stripe for payments (using Stripe.js and webhooks).
+Subscription tiers: free (limited storage/downloads), premium (unlimited storage, priority support, ad-free), enterprise (custom features).
+One-time payments for extra storage or file boosts.
+Billing management: invoices, payment history, auto-renewal.
+Promo codes and discounts.
+Handle refunds and cancellations.
+Webhooks for payment events (e.g., subscription created, payment failed).
+
+
+Security and Compliance:
+
+Input validation and sanitization (using Joi or Express-validator).
+Rate limiting (using express-rate-limit).
+CAPTCHA on registration/login (using reCAPTCHA).
+Encryption: encrypt sensitive files at rest (using Crypto module).
+GDPR compliance: data export/delete requests.
+Virus scanning on uploads (integrate with ClamAV or VirusTotal API if possible).
+
+
+Performance and Scalability:
+
+Caching: use Redis for session caching and frequently accessed data.
+Background jobs: use Bull or Agenda for tasks like file processing, email sending.
+API rate limiting and pagination for large lists.
+Error handling: global error middleware with custom error responses.
+Testing: include unit tests with Jest and integration tests.
+
+
+Additional Features:
+
+API documentation: provide Swagger docs for all endpoints.
+Internationalization: support multiple languages (i18n) in API responses.
+Analytics: integrate Google Analytics or custom tracking via API logs.
+Integration with third-party services: Dropbox/Google Drive import/export.
+Custom domains for premium users.
+Affiliate program: users earn credits for referrals.
+
+
+
+Structure the output as follows:
+
+Project Setup: Instructions for setting up the project (package.json dependencies, env variables like DATABASE_URL, JWT_SECRET, STRIPE_KEY, AWS credentials).
+Database Models: Sequelize models for User, File, Folder, ShareLink, Payment, Subscription, Notification, Report, Log.
+Routes and Controllers: Express routes for all endpoints (e.g., /auth/register, /files/upload, /admin/users, /payments/subscribe).
+Middleware: Auth middleware, error handlers, file upload handlers.
+Services: Separate logic for emails, payments, file processing.
+Deployment: Notes on deploying to Heroku/Vercel/AWS, with PM2 for process management.
+Full Code Snippets: Provide complete, runnable code for key files (app.js, models/, routes/, controllers/, etc.).
+
+Ensure the code is modular, follows best practices (ES6+ syntax, async/await), and is secure. Comment the code extensively. If any feature requires external APIs, include placeholders for keys. Finally, provide a step-by-step guide to run the app locally.
